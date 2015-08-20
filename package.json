@@ -1,0 +1,25 @@
+{
+  "name": "jello-command-feserver",
+  "version": "0.0.1",
+  "description": "Build a node server for jello environment.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/diydyq/jello-command-feserver.git"
+  },
+  "keywords": [
+    "jello"
+  ],
+  "author": {
+    "name": "diydyq"
+  },
+  "dependencies": {
+    "step": "0.0.5",
+    "tar": "~0.1.19"
+  },
+  "readme": "ERROR: No README data found!"
+}
