@@ -77,9 +77,7 @@ exports.register = function(commander) {
                     fis.log.error('FeServer Path does not existed: ' + watchDir);
                 }
 
-            }
-
-            if (cmd == 'stop') {
+            }else if (cmd == 'stop') {
                 // TODO
             }
 
