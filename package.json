@@ -1,6 +1,49 @@
 {
   "name": "jello-command-feserver",
   "version": "0.0.1",
+<<<<<<< HEAD
+  "description": "",
+  "main": "command.js",
+  "author": {
+    "name": "songzheng01,diydyq"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "co-fs": "^1.2.0",
+    "koa": "^0.21.0",
+    "koa-body": "^1.2.1",
+    "koa-compress": "^1.0.8",
+    "koa-conditional-get": "^1.0.3",
+    "koa-etag": "^2.0.0",
+    "koa-favicon": "^1.2.0",
+    "koa-logger": "^1.2.2",
+    "koa-static": "^1.4.9",
+    "koa-static-cache": "^3.1.1",
+    "koa-views": "^3.0.0",
+    "markdown": "^0.5.0",
+    "moment": "^2.10.3",
+    "swig": "^1.4.2"
+  },
+  "dependencies": {
+    "koa-router": "^5.1.2",
+    "q": "^1.4.1",
+    "request": "^2.61.0",
+    "co-fs": "^1.2.0",
+    "koa": "^0.21.0",
+    "koa-body": "^1.2.1",
+    "koa-compress": "^1.0.8",
+    "koa-conditional-get": "^1.0.3",
+    "koa-etag": "^2.0.0",
+    "koa-favicon": "^1.2.0",
+    "koa-logger": "^1.2.2",
+    "koa-static": "^1.4.9",
+    "koa-static-cache": "^3.1.1",
+    "koa-views": "^3.0.0",
+    "markdown": "^0.5.0",
+    "moment": "^2.10.3",
+    "swig": "^1.4.2"
+  }
+=======
   "description": "Build a node server for jello environment.",
   "main": "index.js",
   "scripts": {
@@ -22,4 +65,5 @@
     "tar": "~0.1.19"
   },
   "readme": "ERROR: No README data found!"
+>>>>>>> 4e16c11e4224d54f31cd2db1823119449ab2092f
 }

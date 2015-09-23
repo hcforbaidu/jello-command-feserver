@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+npm-debug.log
+node_modules
+public/bower_components
+=======
 /node_modules
 .DS_Store
 server.jar
+>>>>>>> 4e16c11e4224d54f31cd2db1823119449ab2092f
