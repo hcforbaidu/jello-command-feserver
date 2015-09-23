@@ -1,8 +1,7 @@
 {
   "name": "jello-command-feserver",
   "version": "0.0.1",
-<<<<<<< HEAD
-  "description": "",
+  "description": "Launch one HTTP WEB Server: take one directory as context root.",
   "main": "command.js",
   "author": {
     "name": "songzheng01,diydyq"
@@ -43,27 +42,4 @@
     "moment": "^2.10.3",
     "swig": "^1.4.2"
   }
-=======
-  "description": "Build a node server for jello environment.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/diydyq/jello-command-feserver.git"
-  },
-  "keywords": [
-    "jello"
-  ],
-  "author": {
-    "name": "diydyq"
-  },
-  "dependencies": {
-    "step": "0.0.5",
-    "tar": "~0.1.19"
-  },
-  "readme": "ERROR: No README data found!"
->>>>>>> 4e16c11e4224d54f31cd2db1823119449ab2092f
 }

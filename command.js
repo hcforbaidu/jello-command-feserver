@@ -33,9 +33,9 @@ var serverRoot = (function() {
 })();
 
 
-exports.name = 'devserver';
-exports.usage = '[options]';
-exports.desc = 'start debug env';
+exports.name = 'feserver';
+exports.usage = '<command> [options]';
+exports.desc = 'Launch one HTTP WEB Server: take one directory as context root.';
 
 exports.register = function(commander) {
 
