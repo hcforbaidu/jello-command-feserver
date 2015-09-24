@@ -129,7 +129,7 @@ function stopServer(){
                             process.kill(pid, 'SIGINT');
                             process.kill(pid, 'SIGKILL');
                         } catch (e) {}
-                        fis.log.error('shutdown ' + opt['process'] + ' process [' + iMatch[0] + ']\n');
+                        fis.log.notice('shutdown ' + opt['process'] + ' process [' + iMatch[0] + ']\n');
                         //process.stdout.write('shutdown ' + opt['process'] + ' process [' + iMatch[0] + ']\n');
                     }
                 }
