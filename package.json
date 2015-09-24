@@ -1,6 +1,6 @@
 {
   "name": "jello-command-feserver",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Launch one HTTP WEB Server: take one directory as context root.",
   "main": "command.js",
   "author": {
@@ -8,6 +8,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "step": "0.0.5",
     "co-fs": "^1.2.0",
     "koa": "^0.21.0",
     "koa-body": "^1.2.1",
@@ -24,6 +25,7 @@
     "swig": "^1.4.2"
   },
   "dependencies": {
+    "step": "0.0.5",
     "koa-router": "^5.1.2",
     "q": "^1.4.1",
     "request": "^2.61.0",
