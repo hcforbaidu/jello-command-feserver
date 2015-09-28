@@ -44,18 +44,31 @@ function startServer(opt){
     // FeServerPath
     opt.dir = fis.util.realpath(opt.dir);
 
+    if(opt.name == null){
+        // 从缓存中获取
+        var tmp = _.getFeName();
+        if (fis.util.exists(tmp)) {
+            var name = fis.util.fs.readFileSync(tmp, 'utf8').trim();
+            opt.name = name || '';
+        }else{
+            opt.name = '';
+        }
+    }else{
+        // 写入到缓存中
+        fis.util.write(_.getFeName(), opt.name);
+    }
+
     if (opt.dir) {
         fis.log.notice('FeServer Path Watch: ' + opt.dir);
 
         // 命令路径
         var serverJSPath = path.join(__dirname, './lib/server.js');
-        var _cmd = 'start node --harmony ' + serverJSPath + ' ' + opt.dir + ' ' + opt.port;
-
         var args = [
             '--harmony',
             serverJSPath,
             opt.dir,
-            opt.port
+            opt.port,
+            opt.name
         ];
 
         var server = spawn('node', args, {
@@ -129,7 +142,7 @@ function stopServer(){
                             process.kill(pid, 'SIGINT');
                             process.kill(pid, 'SIGKILL');
                         } catch (e) {}
-                        fis.log.notice('shutdown ' + opt['process'] + ' process [' + iMatch[0] + ']\n');
+                        fis.log.error('shutdown ' + opt['process'] + ' process [' + iMatch[0] + ']\n');
                         //process.stdout.write('shutdown ' + opt['process'] + ' process [' + iMatch[0] + ']\n');
                     }
                 }
@@ -182,6 +195,7 @@ exports.register = function(commander) {
     commander
         .option('-d, --dir <directory>', 'Directory serve as HTTP WEB Server path. Default: jello www.')
         .option('-p, --port <port>', 'Port of HTTP WEB Server runs on. Default: 8000')
+        .option('-n, --name <fe username>', 'Record the username of FE author.')
         .action(function() {
             var args = [].slice.call(arguments);
             var options = args.pop();

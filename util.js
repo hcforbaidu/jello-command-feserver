@@ -84,6 +84,10 @@ _.getPidFile = function() {
     return fis.project.getTempPath('feserver/pid');
 };
 
+_.getFeName = function () {
+    return fis.project.getTempPath('feserver/fename');
+};
+
 function checkDir(dest) {
     var path = require('path');
 
