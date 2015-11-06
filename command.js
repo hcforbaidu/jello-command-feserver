@@ -196,6 +196,8 @@ exports.register = function(commander) {
         .option('-d, --dir <directory>', 'Directory serve as HTTP WEB Server path. Default: jello www.')
         .option('-p, --port <port>', 'Port of HTTP WEB Server runs on. Default: 8000')
         .option('-n, --name <fe username>', 'Record the username of FE author.')
+        .option('-e, --env <fe env name>', 'Record the environment name of FE.')
+        .option('-j, --json <fe json desc>', 'Record the SVN code submit info of FE.')
         .action(function() {
             var args = [].slice.call(arguments);
             var options = args.pop();
