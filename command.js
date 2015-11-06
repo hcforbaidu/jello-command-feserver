@@ -68,7 +68,9 @@ function startServer(opt){
             serverJSPath,
             opt.dir,
             opt.port,
-            opt.name
+            opt.name,
+            opt.env,
+            opt.json
         ];
 
         var server = spawn('node', args, {
