@@ -63,6 +63,8 @@ function startServer(opt){
 
         // 命令路径
         var serverJSPath = path.join(__dirname, './lib/server.js');
+        // 本机地址：true|false|value
+        var enableAddrVal = opt.enable_addr && opt.addr;
         var args = [
             '--harmony',
             serverJSPath,
@@ -70,7 +72,8 @@ function startServer(opt){
             opt.port,
             opt.name,
             opt.env,
-            opt.json
+            opt.json,
+            enableAddrVal
         ];
 
         var server = spawn('node', args, {
@@ -200,6 +203,8 @@ exports.register = function(commander) {
         .option('-n, --name <fe username>', 'Record the username of FE author.')
         .option('-e, --env <fe env name>', 'Record the environment name of FE.')
         .option('-j, --json <fe json desc>', 'Record the SVN code submit info of FE.')
+        .option('--enable_addr', 'Enable embedded Local IP into map resources.')
+        .option('-a, --addr <IP Address>', 'Embedded Local IP into map resources.', "0")
         .action(function() {
             var args = [].slice.call(arguments);
             var options = args.pop();
