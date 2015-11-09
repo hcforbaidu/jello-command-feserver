@@ -1,10 +1,10 @@
 {
   "name": "jello-command-feserver",
-  "version": "0.0.13",
+  "version": "0.0.16",
   "description": "Launch one HTTP WEB Server: take one directory as context root.",
   "main": "command.js",
   "author": {
-    "name": "songzheng01,diydyq"
+    "name": "diydyq"
   },
   "license": "MIT",
   "devDependencies": {

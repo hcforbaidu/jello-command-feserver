@@ -199,9 +199,9 @@ exports.register = function(commander) {
 
     commander
         .option('-d, --dir <directory>', 'Directory serve as HTTP WEB Server path. Default: jello www.')
-        .option('-p, --port <port>', 'Port of HTTP WEB Server runs on. Default: 8000')
+        .option('-p, --port <port>', 'Port of HTTP WEB Server runs on. Default: 8000', 8000)
         .option('-n, --name <fe username>', 'Record the username of FE author.')
-        .option('-e, --env <fe env name>', 'Record the environment name of FE.')
+        .option('-e, --env <fe env name>', 'Record the environment name of FE.', '前端FE环境')
         .option('-j, --json <fe json desc>', 'Record the SVN code submit info of FE.')
         .option('--enable_addr', 'Enable embedded Local IP into map resources.')
         .option('-a, --addr <IP Address>', 'Embedded Local IP into map resources.', "0")
@@ -210,7 +210,6 @@ exports.register = function(commander) {
             var options = args.pop();
             var cmd = args.shift();
 
-            options.port = options.port || 8000;
             options.dir  = options.dir ? path.join(options.dir) : serverRoot;
 
             if (cmd == 'start') {
