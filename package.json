@@ -1,6 +1,6 @@
 {
   "name": "jello-command-feserver",
-  "version": "0.0.15",
+  "version": "0.0.13",
   "description": "Launch one HTTP WEB Server: take one directory as context root.",
   "main": "command.js",
   "author": {
@@ -9,7 +9,6 @@
   "license": "MIT",
   "devDependencies": {
     "co-fs": "^1.2.0",
-    "extend": "^3.0.0",
     "koa": "^0.21.0",
     "koa-body": "^1.2.1",
     "koa-compress": "^1.0.8",
@@ -45,5 +44,11 @@
     "request": "^2.61.0",
     "step": "0.0.5",
     "swig": "^1.4.2"
-  }
+  },
+  "gitHead": "16468ef3d927c21f670fc23102bb5dde4cfeffca",
+  "readme": "ERROR: No README data found!",
+  "_id": "jello-command-feserver@0.0.12",
+  "scripts": {},
+  "_shasum": "62fe92046e5171c1d67722b1476a858b33d227ec",
+  "_from": "jello-command-feserver@*"
 }
