@@ -81,7 +81,7 @@ _.getRCFile = function() {
 };
 
 _.getPidFile = function() {
-    return fis.project.getTempPath('feserver/pid');
+    return fis.project.getTempPath('feserver/pidport');
 };
 
 _.getFeName = function () {

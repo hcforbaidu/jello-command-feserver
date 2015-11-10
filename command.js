@@ -43,6 +43,8 @@ function startServer(opt){
 
     // FeServerPath
     opt.dir = fis.util.realpath(opt.dir);
+    // FeServerPort
+    opt.port = opt.port || 8000;
 
     if(opt.name == null){
         // 从缓存中获取
@@ -99,7 +101,8 @@ function startServer(opt){
             } catch (e) {}
         });
 
-        fis.util.write(_.getPidFile(), server.pid);
+        var isAppend = fis.util.exists(_.getPidFile()) ? true : false;
+        fis.util.write(_.getPidFile(), server.pid + ',' + opt.port + '\n', 'UTF-8', isAppend);
 
         options({
             dir:        opt.dir,
@@ -113,13 +116,26 @@ function startServer(opt){
 
 }
 
-function stopServer(){
+function stopServer(userOptions){
     var tmp = _.getPidFile();
     var opt = options();
     var done = this;
 
     if (fis.util.exists(tmp)) {
-        var pid = fis.util.fs.readFileSync(tmp, 'utf8').trim();
+        var fileCont = fis.util.fs.readFileSync(tmp, 'utf8').trim();
+        var feHash = {};
+
+        fileCont.split('\n').map(function (row) {
+            var fields = row.split(',');
+            var feItem = {
+                pid: fields[0],
+                port: fields[1]
+            };
+            return feItem;
+        }).forEach(function (v) {
+            feHash[v.pid+''] = v.port;
+        });
+
         var list, msg = '';
         var isWin = fis.util.isWin();
 
@@ -139,21 +155,30 @@ function stopServer(){
 
                 if (reg.test(item)) {
                     var iMatch = item.match(/\d+/);
-                    if (iMatch && iMatch[0] == pid) {
+                    // 1. 没传递且匹配端口大于0；2. 匹配端口等于传递
+                    if (iMatch && iMatch[0] && ((!userOptions.port && feHash[iMatch[0]+''] > 0) || (userOptions.port && feHash[iMatch[0]] == userOptions.port))) {
+                        var iMatchPid = iMatch[0];
                         try {
                             fis.log.notice('FeServer is running, so stop it: \n');
                             fis.log.notice(item);
 
-                            process.kill(pid, 'SIGINT');
-                            process.kill(pid, 'SIGKILL');
+                            process.kill(iMatchPid, 'SIGINT');
+                            process.kill(iMatchPid, 'SIGKILL');
+                            delete feHash[iMatch[0]];
                         } catch (e) {}
-                        fis.log.error('shutdown ' + opt['process'] + ' process [' + iMatch[0] + ']\n');
+                        fis.log.notice('shutdown ' + opt['process'] + ' process [' + iMatch[0] + ']\n');
                         //process.stdout.write('shutdown ' + opt['process'] + ' process [' + iMatch[0] + ']\n');
                     }
                 }
             });
 
+            // Update
             fis.util.fs.unlinkSync(tmp);
+            Object.keys(feHash).forEach(function (k, i) {
+                var isAppend = i === 0 ? false : true;
+                k && fis.util.write(_.getPidFile(), k + ',' + feHash[k] + '\n', 'UTF-8', isAppend);
+            });
+            Object.keys(feHash).length === 0 && fis.util.del(tmp);
 
             if (done) {
                 done(false, opt);
@@ -199,7 +224,7 @@ exports.register = function(commander) {
 
     commander
         .option('-d, --dir <directory>', 'Directory serve as HTTP WEB Server path. Default: jello www.')
-        .option('-p, --port <port>', 'Port of HTTP WEB Server runs on. Default: 8000', 8000)
+        .option('-p, --port <port>', 'Port of HTTP WEB Server runs on. Default: 8000')
         .option('-n, --name <fe username>', 'Record the username of FE author.')
         .option('-e, --env <fe env name>', 'Record the environment name of FE.', '前端FE环境')
         .option('-j, --json <fe json desc>', 'Record the SVN code submit info of FE.')
@@ -214,13 +239,15 @@ exports.register = function(commander) {
 
             if (cmd == 'start') {
                 // 启动
-                step(stopServer, function () {
+                step(function () {
+                    stopServer.call(this, options);
+                }, function () {
                     startServer(options);
                 });
 
             }else if (cmd == 'stop') {
                 // 停止
-                stopServer();
+                stopServer(options);
             }else if (cmd == 'restart') {
                 // 重启
                 step(stopServer, function () {
