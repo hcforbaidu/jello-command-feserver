@@ -150,6 +150,7 @@ function stopServer(userOptions){
         });
 
         list.on('exit', function() {
+            var processHash = {};
             msg.split(/[\r\n]+/).forEach(function(item) {
                 var reg = new RegExp('\\b' + opt['process'] + '\\b', 'i');
 
@@ -169,12 +170,20 @@ function stopServer(userOptions){
                         fis.log.notice('shutdown ' + opt['process'] + ' process [' + iMatch[0] + ']\n');
                         //process.stdout.write('shutdown ' + opt['process'] + ' process [' + iMatch[0] + ']\n');
                     }
+                    iMatch && iMatch[0] && (processHash[iMatch[0]] = true);
                 }
             });
 
             // Update
             fis.util.fs.unlinkSync(tmp);
             Object.keys(feHash).forEach(function (k, i) {
+
+                // 如果不存在，则删除掉，不保存
+                if(processHash[k] === undefined){
+                    delete feHash[k];
+                    return;
+                }
+
                 var isAppend = i === 0 ? false : true;
                 k && fis.util.write(_.getPidFile(), k + ',' + feHash[k] + '\n', 'UTF-8', isAppend);
             });
